@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="13dp"
+    android:layout_height="13dp">
+
+    <ImageView
+        android:id="@+id/xBottom_style"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/badge_red_solid"
+        android:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/xBottom_badge_num"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:gravity="center"
+        android:maxLength="2"
+        android:text=""
+        android:textSize="8.5dp" />
+
+</RelativeLayout>

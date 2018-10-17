@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">XBottomBar</string>
+    <string name="max_badge">99</string>
+</resources>
