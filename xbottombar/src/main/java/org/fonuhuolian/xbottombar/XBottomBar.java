@@ -61,10 +61,10 @@ public class XBottomBar extends LinearLayout {
      * @param attrs
      */
     private void getAttrs(Context context, AttributeSet attrs) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XBottomBarStyle);
-        unSelectedTextColor = ta.getColor(R.styleable.XBottomBarStyle_unSelectedTextColor, unSelectedTextColor);
-        selectedTextColor = ta.getColor(R.styleable.XBottomBarStyle_selectedTextColor, selectedTextColor);
-        lineColor = ta.getColor(R.styleable.XBottomBarStyle_diverColor, lineColor);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XBottomBar);
+        unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_unSelectedTextColor, unSelectedTextColor);
+        selectedTextColor = ta.getColor(R.styleable.XBottomBar_selectedTextColor, selectedTextColor);
+        lineColor = ta.getColor(R.styleable.XBottomBar_diverColor, lineColor);
         ta.recycle();
     }
 

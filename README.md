@@ -16,9 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation ('com.github.fonuhuolian:XBottomBar:1.0.2'){
-    exclude group: 'com.android.support'
-}
+implementation 'com.github.fonuhuolian:XBottomBar:1.0.4'
 ```
 
 > xml
