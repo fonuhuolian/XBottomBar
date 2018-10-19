@@ -64,7 +64,7 @@ public class XBottomBar extends LinearLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XBottomBar);
         unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_unSelectedTextColor, unSelectedTextColor);
         selectedTextColor = ta.getColor(R.styleable.XBottomBar_selectedTextColor, selectedTextColor);
-        lineColor = ta.getColor(R.styleable.XBottomBar_diverColor, lineColor);
+        lineColor = ta.getColor(R.styleable.XBottomBar_dividerColor, lineColor);
         ta.recycle();
     }
 

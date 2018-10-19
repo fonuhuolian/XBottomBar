@@ -4,7 +4,7 @@
     <declare-styleable name="XBottomBar">
         <attr name="selectedTextColor" format="color|reference" />
         <attr name="unSelectedTextColor" format="color|reference" />
-        <attr name="diverColor" format="color|reference" />
+        <attr name="dividerColor" format="color|reference" />
     </declare-styleable>
 
 </resources>

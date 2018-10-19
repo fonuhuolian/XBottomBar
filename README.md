@@ -26,7 +26,7 @@ implementation 'com.github.fonuhuolian:XBottomBar:1.0.4'
     android:id="@+id/xBottomBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:diverColor="@color/colorPrimary"
+    app:dividerColor="@color/colorPrimary"
     app:selectedTextColor="@color/colorAccent"
     app:unSelectedTextColor="@color/colorPrimaryDark" />
 ```
