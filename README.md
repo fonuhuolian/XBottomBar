@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.0.4'
+implementation 'com.github.fonuhuolian:XBottomBar:1.0.5'
 ```
 
 > xml
