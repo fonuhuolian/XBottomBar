@@ -20,9 +20,10 @@ implementation 'com.github.fonuhuolian:XBottomBar:1.0.5'
 ```
 
 > 混淆
-
+```
 -dontwarn org.fonuhuolian.xbottombar.**
 -keep class org.fonuhuolian.xbottombar.**{*;}
+```
 
 > xml
 
