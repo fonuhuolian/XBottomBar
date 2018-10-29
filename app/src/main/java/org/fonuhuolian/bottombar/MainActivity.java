@@ -6,10 +6,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.fonuhuolian.xbottombar.XBottomBar;
+import org.fonuhuolian.xbottombar.XBottomBarListener;
 import org.fonuhuolian.xbottombar.XBottomCircleStyle;
 import org.fonuhuolian.xbottombar.XBottomItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements XBottomBarListener {
 
     private XBottomBar xBottomBar;
 
@@ -34,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 重写底部导航item的点击事件
-        xBottomBar.overrideListener(1, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "消息没有fragment", Toast.LENGTH_SHORT).show();
-            }
-        });
+        xBottomBar.overrideOnClickListener(1, this);
+    }
 
+
+    @Override
+    public void onClick(View v, int index) {
+        if (index == 1)
+            Toast.makeText(this, "无fragment", Toast.LENGTH_SHORT).show();
     }
 }

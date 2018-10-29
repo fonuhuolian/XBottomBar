@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.0.5'
+implementation 'com.github.fonuhuolian:XBottomBar:1.0.6'
 ```
 
 > 混淆
@@ -57,9 +57,9 @@ xBottomBar.getTabView(2).setCircleSytle(XBottomCircleStyle.REDSOLID).setNoticeNu
 
 
 // 重写底部导航item的点击事件
-xBottomBar.overrideListener(1, new View.OnClickListener() {
+xBottomBar.overrideOnClickListener(1, new XBottomBarListener() {
     @Override
-    public void onClick(View v) {
+    public void onClick(View v, int index) {
         Toast.makeText(MainActivity.this, "消息没有fragment", Toast.LENGTH_SHORT).show();
     }
 });

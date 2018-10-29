@@ -2,7 +2,6 @@ package org.fonuhuolian.xbottombar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -30,9 +29,6 @@ public class XBottomBarItem extends RelativeLayout {
      */
     public XBottomBarItem(Context context, int imgResUnSelected, int imgResSelected, String title) {
         super(context);
-
-        Log.e("ddd", imgResUnSelected + "");
-        Log.e("ddd", imgResSelected + "");
 
         // 加载布局
         LayoutInflater.from(context).inflate(R.layout.x_bottom_bar_item, this, true);

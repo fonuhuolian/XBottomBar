@@ -112,20 +112,21 @@ public class XBottomBar extends LinearLayout {
 
     /****************重写Tab点击事件(例：登录拦截)*****************************/
 
-    public void overrideListener(int index, OnClickListener listener) {
-        getTabView(index).setOnClickListener(listener);
+    public void overrideOnClickListener(final int index, final XBottomBarListener listener) {
+        getTabView(index).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.onClick(v, index);
+            }
+        });
     }
 
     /****************返回TabView*****************************/
 
     public XBottomBarItem getTabView(int index) {
-
-        mTabHost.getTabWidget().setClipChildren(false);
-
         return (XBottomBarItem) mTabHost.getTabWidget().getChildTabViewAt(index);
-
     }
-
 
     /****************设置指定下标的数字提醒*****************************/
 
