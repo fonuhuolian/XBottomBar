@@ -308,7 +308,7 @@ public class XBottomFragmentTabHost extends TabHost implements
         if (mAttached) {
             FragmentTransaction ft = doTabChanged(tabId, null);
             if (ft != null) {
-                ft.commit();
+                ft.commitAllowingStateLoss();
             }
         }
         if (mOnTabChangeListener != null) {
