@@ -21,8 +21,6 @@ public class XBottomBar extends LinearLayout {
 
     // 自定义FragmentTabHost
     private XBottomFragmentTabHost mTabHost;
-    // 底部导航栏上方的分割线
-    private View line;
     // 上下文
     private Context mContext;
 
@@ -43,11 +41,11 @@ public class XBottomBar extends LinearLayout {
 
         this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.x_bottom_bar, this, true);
-        this.line = findViewById(R.id.xBottom_line);
         this.mTabHost = findViewById(R.id.xBottom_tabHost);
 
-
-        this.line.setBackgroundColor(lineColor);
+        // 底部导航栏上方的分割线
+        View line = findViewById(R.id.xBottom_line);
+        line.setBackgroundColor(lineColor);
 
         FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
         mTabHost.setup(mContext, fragmentManager, R.id.tabHostContent);
@@ -74,12 +72,6 @@ public class XBottomBar extends LinearLayout {
         // 组装底部导航栏的item
         XBottomBarItem item = new XBottomBarItem(mContext, xItem.getImgResUnSelected(), xItem.getImgResSelected(), xItem.getTitle())
                 .setTextColor(unSelectedTextColor, selectedTextColor);
-
-        XBottomCircleStyle style = xItem.getxBottomCircleStyle();
-
-        if (style != null)
-            item.setCircleSytle(style);
-
 
         mTabHost.addTab(mTabHost.newTabSpec(String.valueOf(++mark)).setIndicator(item)
                 , xItem.getClss(), xItem.getBundle());
