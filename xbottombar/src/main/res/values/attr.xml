@@ -5,6 +5,7 @@
         <attr name="selectedTextColor" format="color|reference" />
         <attr name="unSelectedTextColor" format="color|reference" />
         <attr name="dividerColor" format="color|reference" />
+        <attr name="isUseClickAnim" format="boolean" />
     </declare-styleable>
 
 </resources>

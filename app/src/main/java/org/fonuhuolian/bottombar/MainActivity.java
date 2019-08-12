@@ -44,4 +44,11 @@ public class MainActivity extends AppCompatActivity implements XBottomBarListene
         if (index == 1)
             Toast.makeText(this, "无fragment", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // 重写底部导航item的点击事件
+        xBottomBar.overrideOnClickListener(1, this);
+    }
 }

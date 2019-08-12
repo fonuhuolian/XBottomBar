@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:textSize="10dp"
+        android:textSize="11dp"
         tools:text="文字" />
 
 </RelativeLayout>

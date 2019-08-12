@@ -1,5 +1,8 @@
 package org.fonuhuolian.xbottombar;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
@@ -7,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -28,6 +32,7 @@ public class XBottomBar extends LinearLayout {
     private int lineColor = 0xffff0000;// 线的颜色
     private int selectedTextColor = 0xffff0000;// 选中的文字颜色
     private int unSelectedTextColor = 0xffff0000;// 未选中的文字颜色
+    private boolean isUseAnim;// 是否使用动画
 
     // 标识
     private int mark = -1;
@@ -63,6 +68,7 @@ public class XBottomBar extends LinearLayout {
         unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_unSelectedTextColor, unSelectedTextColor);
         selectedTextColor = ta.getColor(R.styleable.XBottomBar_selectedTextColor, selectedTextColor);
         lineColor = ta.getColor(R.styleable.XBottomBar_dividerColor, lineColor);
+        isUseAnim = ta.getBoolean(R.styleable.XBottomBar_isUseClickAnim, true);
         ta.recycle();
     }
 
@@ -80,10 +86,59 @@ public class XBottomBar extends LinearLayout {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     public XBottomBar initialise() {
 
         mTabHost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
         mTabHost.setCurrentTab(0);
+
+        if (!isUseAnim)
+            return this;
+
+        // 获得tab的数量
+        int childCount = mTabHost.getTabWidget().getTabCount();
+
+        for (int i = 0; i < childCount; i++) {
+
+            final XBottomBarItem tabView = getTabView(i);
+
+            //组合
+            final AnimatorSet animatorPress = new AnimatorSet();
+            ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
+            ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
+            animatorPress.playTogether(scalePressX, scalePressY);
+            animatorPress.setDuration(50);
+
+            final AnimatorSet animatorUp = new AnimatorSet();
+            ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
+            ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
+            animatorUp.playTogether(scaleUpX, scaleUpY);
+            animatorUp.setDuration(50);
+
+            // 监听触摸事件
+            tabView.setOnTouchListener(new OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    int action = motionEvent.getAction();
+
+                    switch (action) {
+                        case MotionEvent.ACTION_DOWN://0
+                            animatorPress.cancel();
+                            animatorUp.cancel();
+                            animatorPress.start();
+                            break;
+                        case MotionEvent.ACTION_UP://1
+                            animatorPress.cancel();
+                            animatorUp.cancel();
+                            animatorUp.start();
+                            break;
+                    }
+
+                    return false;
+                }
+            });
+        }
 
         return this;
     }
