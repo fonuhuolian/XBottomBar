@@ -31,7 +31,7 @@
         android:layout_below="@id/xBottom_icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2.5dp"
+        android:layout_marginBottom="3dp"
         android:textSize="11dp"
         tools:text="文字" />
 
