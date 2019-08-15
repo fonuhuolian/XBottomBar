@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="6.5dp"
         android:minHeight="24dp" />
 
     <org.fonuhuolian.xbottombar.XBottomBadge
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/xBottom_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2.5dp"
         android:textSize="11dp"
         tools:text="文字" />
 
