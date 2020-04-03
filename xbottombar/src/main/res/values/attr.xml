@@ -2,10 +2,10 @@
 <resources>
 
     <declare-styleable name="XBottomBar">
-        <attr name="selectedTextColor" format="color|reference" />
-        <attr name="unSelectedTextColor" format="color|reference" />
-        <attr name="dividerColor" format="color|reference" />
-        <attr name="isUseClickAnim" format="boolean" />
+        <attr name="xBottom_selectedTextColor" format="color" />
+        <attr name="xBottom_unSelectedTextColor" format="color" />
+        <attr name="xBottom_dividerColor" format="color|reference" />
+        <attr name="xBottom_isUseClickAnim" format="boolean" />
     </declare-styleable>
 
 </resources>

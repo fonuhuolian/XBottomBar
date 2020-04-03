@@ -65,15 +65,15 @@ public class XBottomBar extends LinearLayout {
      */
     private void getAttrs(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XBottomBar);
-        unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_unSelectedTextColor, unSelectedTextColor);
-        selectedTextColor = ta.getColor(R.styleable.XBottomBar_selectedTextColor, selectedTextColor);
-        lineColor = ta.getColor(R.styleable.XBottomBar_dividerColor, lineColor);
-        isUseAnim = ta.getBoolean(R.styleable.XBottomBar_isUseClickAnim, true);
+        unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_xBottom_unSelectedTextColor, unSelectedTextColor);
+        selectedTextColor = ta.getColor(R.styleable.XBottomBar_xBottom_selectedTextColor, selectedTextColor);
+        lineColor = ta.getColor(R.styleable.XBottomBar_xBottom_dividerColor, lineColor);
+        isUseAnim = ta.getBoolean(R.styleable.XBottomBar_xBottom_isUseClickAnim, true);
         ta.recycle();
     }
 
     /****************填充底部导航栏数据*****************************/
-    public XBottomBar addItem(XBottomItem xItem) {
+    public XBottomBar addXBottomItem(XBottomItem xItem) {
 
         // 组装底部导航栏的item
         XBottomBarItem item = new XBottomBarItem(mContext, xItem.getImgResUnSelected(), xItem.getImgResSelected(), xItem.getTitle())
@@ -87,7 +87,7 @@ public class XBottomBar extends LinearLayout {
 
 
     @SuppressLint("ClickableViewAccessibility")
-    public XBottomBar initialise() {
+    public XBottomBar xBottomInitialise() {
 
         mTabHost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
         mTabHost.setCurrentTab(0);
@@ -100,7 +100,7 @@ public class XBottomBar extends LinearLayout {
 
         for (int i = 0; i < childCount; i++) {
 
-            final XBottomBarItem tabView = getTabView(i);
+            final XBottomBarItem tabView = getXBottomTabView(i);
 
             //组合
             final AnimatorSet animatorPress = new AnimatorSet();
@@ -146,21 +146,20 @@ public class XBottomBar extends LinearLayout {
 
     /****************设置当前选中哪个Tab*****************************/
 
-    public void setCurrentTab(int index) {
-
+    public void setXBottomCurrentTab(int index) {
         mTabHost.setCurrentTab(index);
     }
 
     /****************返回当前选中底部button的index*****************************/
 
-    public int getCurrentTab() {
+    public int getXBottomCurrentTab() {
         return mTabHost.getCurrentTab();
     }
 
     /****************重写Tab点击事件(例：登录拦截)*****************************/
 
-    public void overrideOnClickListener(final int index, final XBottomBarListener listener) {
-        getTabView(index).setOnClickListener(new OnClickListener() {
+    public void setXBottomOnClickListener(final int index, final XBottomBarListener listener) {
+        getXBottomTabView(index).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null)
@@ -171,20 +170,7 @@ public class XBottomBar extends LinearLayout {
 
     /****************返回TabView*****************************/
 
-    public XBottomBarItem getTabView(int index) {
+    public XBottomBarItem getXBottomTabView(int index) {
         return (XBottomBarItem) mTabHost.getTabWidget().getChildTabViewAt(index);
-    }
-
-    /****************设置指定下标的数字提醒*****************************/
-
-    public void setNoticeNum(int index, int num) {
-        getTabView(index).setNoticeNum(num);
-    }
-
-
-    /****************设置指定下标的数字提醒样式*****************************/
-
-    public void setNoticeStyle(int index, XBottomCircleStyle style) {
-        getTabView(index).setCircleSytle(style);
     }
 }

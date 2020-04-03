@@ -11,7 +11,7 @@ public class XBottomUtil {
      * convert dp to its equivalent px
      * 将dp转换为与之相等的px
      */
-    public static int dp2px(Context context, float dipValue) {
+    protected static int dp2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
@@ -20,7 +20,7 @@ public class XBottomUtil {
     /**
      * 获取文字颜色状态列表
      */
-    public static ColorStateList getStateListColor(int textColorUnSelected, int textColorSelected) {
+    protected static ColorStateList getStateListColor(int textColorUnSelected, int textColorSelected) {
 
         int[] colors = new int[]{textColorUnSelected, textColorSelected, textColorUnSelected};
 
@@ -39,7 +39,7 @@ public class XBottomUtil {
     /**
      * 获取图片状态列表
      */
-    public static StateListDrawable getStateListDrawable(Context context, int imgResUnSelected, int imgResSelected) {
+    protected static StateListDrawable getStateListDrawable(Context context, int imgResUnSelected, int imgResSelected) {
 
         StateListDrawable stateListDrawable = new StateListDrawable();
 

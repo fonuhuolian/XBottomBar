@@ -12,8 +12,8 @@
         android:id="@+id/xBottomBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:dividerColor="@color/colorPrimary"
-        app:selectedTextColor="@color/colorAccent"
-        app:unSelectedTextColor="@color/colorPrimaryDark" />
+        app:xBottom_dividerColor="@color/colorPrimary"
+        app:xBottom_selectedTextColor="@color/colorAccent"
+        app:xBottom_unSelectedTextColor="@color/colorPrimaryDark" />
 
 </LinearLayout>
