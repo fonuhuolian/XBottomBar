@@ -6,6 +6,8 @@
         <attr name="xBottom_unSelectedTextColor" format="color" />
         <attr name="xBottom_dividerColor" format="color|reference" />
         <attr name="xBottom_isUseClickAnim" format="boolean" />
+        <attr name="xBottom_background" format="color|reference" />
+        <attr name="xBottom_dividerHeight" format="dimension" />
     </declare-styleable>
 
 </resources>

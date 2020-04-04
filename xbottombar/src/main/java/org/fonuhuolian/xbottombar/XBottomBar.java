@@ -5,6 +5,10 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
@@ -25,11 +30,15 @@ public class XBottomBar extends LinearLayout {
 
     // 自定义FragmentTabHost
     private XBottomFragmentTabHost mTabHost;
+    // 分割线
+    private View mLine;
     // 上下文
     private Context mContext;
 
     // 自定义的属性
-    private int lineColor = 0xffff0000;// 线的颜色
+    private Drawable lineColor;// 线的颜色
+    private Drawable bgDrawable;// 背景
+    private int lineHeight;// 分割线高度
     private int selectedTextColor = 0xffff0000;// 选中的文字颜色
     private int unSelectedTextColor = 0xffff0000;// 未选中的文字颜色
     private boolean isUseAnim;// 是否使用动画
@@ -46,11 +55,17 @@ public class XBottomBar extends LinearLayout {
 
         this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.x_bottom_bar, this, true);
-        this.mTabHost = findViewById(R.id.xBottom_tabHost);
+        mTabHost = findViewById(R.id.xBottom_tabHost);
 
         // 底部导航栏上方的分割线
-        View line = findViewById(R.id.xBottom_line);
-        line.setBackgroundColor(lineColor);
+        mLine = findViewById(R.id.xBottom_line);
+        mLine.setBackground(lineColor);
+
+        // 设置分割线高度
+        addXBottomDividerHeight(lineHeight);
+
+        // 导航栏背景色
+        mTabHost.setBackground(bgDrawable);
 
         FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
         mTabHost.setup(mContext, fragmentManager, R.id.tabHostContent);
@@ -67,8 +82,10 @@ public class XBottomBar extends LinearLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XBottomBar);
         unSelectedTextColor = ta.getColor(R.styleable.XBottomBar_xBottom_unSelectedTextColor, unSelectedTextColor);
         selectedTextColor = ta.getColor(R.styleable.XBottomBar_xBottom_selectedTextColor, selectedTextColor);
-        lineColor = ta.getColor(R.styleable.XBottomBar_xBottom_dividerColor, lineColor);
+        lineColor = ta.getDrawable(R.styleable.XBottomBar_xBottom_dividerColor);
         isUseAnim = ta.getBoolean(R.styleable.XBottomBar_xBottom_isUseClickAnim, true);
+        bgDrawable = ta.getDrawable(R.styleable.XBottomBar_xBottom_background);
+        lineHeight = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_dividerHeight, 1);
         ta.recycle();
     }
 
@@ -82,6 +99,44 @@ public class XBottomBar extends LinearLayout {
         mTabHost.addTab(mTabHost.newTabSpec(String.valueOf(++mark)).setIndicator(item)
                 , xItem.getClss(), xItem.getBundle());
 
+        return this;
+    }
+
+    public XBottomBar addXBottomDividerHeight(int lineHeight) {
+        ViewGroup.LayoutParams layoutParams = mLine.getLayoutParams();
+        layoutParams.height = lineHeight;
+        mLine.setLayoutParams(layoutParams);
+        return this;
+    }
+
+    public XBottomBar addXBottomDividerColor(@ColorRes int colorRes) {
+        mLine.setBackgroundColor(mContext.getResources().getColor(colorRes));
+        return this;
+    }
+
+    public XBottomBar addXBottomDividerColor(String color) {
+        mLine.setBackgroundColor(Color.parseColor(color));
+        return this;
+    }
+
+    public XBottomBar addXBottomDividerDrawable(@DrawableRes int drawableRes) {
+        mLine.setBackground(mContext.getResources().getDrawable(drawableRes));
+        return this;
+    }
+
+
+    public XBottomBar addXBottomBackgroundColor(@ColorRes int colorRes) {
+        mTabHost.setBackgroundColor(mContext.getResources().getColor(colorRes));
+        return this;
+    }
+
+    public XBottomBar addXBottomBackgroundColor(String color) {
+        mTabHost.setBackgroundColor(Color.parseColor(color));
+        return this;
+    }
+
+    public XBottomBar addXBottomBackgroundDrawable(@DrawableRes int drawableRes) {
+        mTabHost.setBackground(mContext.getResources().getDrawable(drawableRes));
         return this;
     }
 
