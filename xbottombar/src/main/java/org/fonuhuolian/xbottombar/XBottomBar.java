@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 /**
@@ -30,6 +32,9 @@ public class XBottomBar extends LinearLayout {
 
     // 自定义FragmentTabHost
     private XBottomFragmentTabHost mTabHost;
+    // 中间的icon
+    private ImageView mMiddleIcon;
+    private RelativeLayout mMiddleLayout;
     // 分割线
     private View mLine;
     // 上下文
@@ -46,6 +51,8 @@ public class XBottomBar extends LinearLayout {
     // 标识
     private int mark = -1;
 
+    // 是否使用了中间icon
+    private boolean isUseMiddle = false;
 
     public XBottomBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -102,6 +109,22 @@ public class XBottomBar extends LinearLayout {
         return this;
     }
 
+    public XBottomBar addXBottomMiddleItemClipChildren(XBottomItem xItem) {
+
+        // 组装底部导航栏的item
+        XBottomBarItem item = new XBottomBarItem(mContext, android.R.color.transparent, android.R.color.transparent, xItem.getTitle())
+                .setTextColor(unSelectedTextColor, selectedTextColor);
+
+        mTabHost.addTab(mTabHost.newTabSpec(String.valueOf(++mark)).setIndicator(item)
+                , xItem.getClss(), xItem.getBundle());
+
+        mMiddleIcon.setImageResource(xItem.getImgResSelected());
+        isUseMiddle = true;
+
+        return this;
+    }
+
+
     public XBottomBar addXBottomDividerHeight(int lineHeight) {
         ViewGroup.LayoutParams layoutParams = mLine.getLayoutParams();
         layoutParams.height = lineHeight;
@@ -150,6 +173,7 @@ public class XBottomBar extends LinearLayout {
         if (!isUseAnim)
             return this;
 
+
         // 获得tab的数量
         int childCount = mTabHost.getTabWidget().getTabCount();
 
@@ -159,15 +183,31 @@ public class XBottomBar extends LinearLayout {
 
             //组合
             final AnimatorSet animatorPress = new AnimatorSet();
-            ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
-            ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
-            animatorPress.playTogether(scalePressX, scalePressY);
+            if (isUseMiddle && i == childCount / 2) {
+                ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
+                ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
+                ObjectAnimator scalePressX1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleX", 1, 0.9f);
+                ObjectAnimator scalePressY1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleY", 1, 0.9f);
+                animatorPress.playTogether(scalePressX, scalePressY, scalePressX1, scalePressY1);
+            } else {
+                ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
+                ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
+                animatorPress.playTogether(scalePressX, scalePressY);
+            }
             animatorPress.setDuration(50);
 
             final AnimatorSet animatorUp = new AnimatorSet();
-            ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
-            ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
-            animatorUp.playTogether(scaleUpX, scaleUpY);
+            if (isUseMiddle && i == childCount / 2) {
+                ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
+                ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
+                ObjectAnimator scaleUpX1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleX", 0.9f, 1);
+                ObjectAnimator scaleUpY1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleY", 0.9f, 1);
+                animatorUp.playTogether(scaleUpX, scaleUpY, scaleUpX1, scaleUpY1);
+            } else {
+                ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
+                ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
+                animatorUp.playTogether(scaleUpX, scaleUpY);
+            }
             animatorUp.setDuration(50);
 
             // 监听触摸事件
@@ -191,6 +231,79 @@ public class XBottomBar extends LinearLayout {
                     }
 
                     return false;
+                }
+            });
+        }
+
+        if (isUseMiddle) {
+
+            if (childCount % 2 != 1) {
+                return this;
+            }
+
+            final XBottomBarItem tabView = getXBottomTabView(childCount / 2);
+
+            this.post(new Runnable() {
+                @Override
+                public void run() {
+
+                    int height = mTabHost.getHeight();
+                    int height1 = mMiddleLayout.getHeight();
+                    final int iconOverHeight = height1 - height;
+
+                    //组合
+                    final AnimatorSet animatorPress = new AnimatorSet();
+                    if (isUseMiddle) {
+                        ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
+                        ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
+                        ObjectAnimator scalePressX1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleX", 1, 0.9f);
+                        ObjectAnimator scalePressY1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleY", 1, 0.9f);
+                        animatorPress.playTogether(scalePressX, scalePressY, scalePressX1, scalePressY1);
+                    } else {
+                        ObjectAnimator scalePressX = ObjectAnimator.ofFloat(tabView, "scaleX", 1, 0.9f);
+                        ObjectAnimator scalePressY = ObjectAnimator.ofFloat(tabView, "scaleY", 1, 0.9f);
+                        animatorPress.playTogether(scalePressX, scalePressY);
+                    }
+                    animatorPress.setDuration(50);
+
+                    final AnimatorSet animatorUp = new AnimatorSet();
+                    if (isUseMiddle) {
+                        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
+                        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
+                        ObjectAnimator scaleUpX1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleX", 0.9f, 1);
+                        ObjectAnimator scaleUpY1 = ObjectAnimator.ofFloat(mMiddleIcon, "scaleY", 0.9f, 1);
+                        animatorUp.playTogether(scaleUpX, scaleUpY, scaleUpX1, scaleUpY1);
+                    } else {
+                        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(tabView, "scaleX", 0.9f, 1);
+                        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(tabView, "scaleY", 0.9f, 1);
+                        animatorUp.playTogether(scaleUpX, scaleUpY);
+                    }
+                    animatorUp.setDuration(50);
+
+                    // 监听触摸事件
+                    mMiddleIcon.setOnTouchListener(new OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                            int action = motionEvent.getAction();
+
+                            switch (action) {
+                                case MotionEvent.ACTION_DOWN://0
+                                    animatorPress.cancel();
+                                    animatorUp.cancel();
+                                    animatorPress.start();
+                                    break;
+                                case MotionEvent.ACTION_UP://1
+                                    animatorPress.cancel();
+                                    animatorUp.cancel();
+                                    animatorUp.start();
+                                    break;
+                            }
+
+                            return false;
+                        }
+                    });
+
                 }
             });
         }
@@ -221,6 +334,17 @@ public class XBottomBar extends LinearLayout {
                     listener.onClick(v, index);
             }
         });
+
+        int tabCount = mTabHost.getTabWidget().getTabCount();
+        if (tabCount % 2 == 1 && isUseMiddle && index == tabCount / 2) {
+            mMiddleIcon.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null)
+                        listener.onClick(getXBottomTabView(index), index);
+                }
+            });
+        }
     }
 
     /****************返回TabView*****************************/

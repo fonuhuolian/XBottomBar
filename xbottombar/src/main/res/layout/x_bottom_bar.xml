@@ -1,31 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/tabHostContent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <View
-        android:id="@+id/xBottom_line"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#abaaaa" />
-
-    <org.fonuhuolian.xbottombar.XBottomFragmentTabHost
-        android:id="@+id/xBottom_tabHost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+            android:id="@+id/tabHostContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    </org.fonuhuolian.xbottombar.XBottomFragmentTabHost>
+        <View
+            android:id="@+id/xBottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#abaaaa" />
 
-</LinearLayout>
+        <org.fonuhuolian.xbottombar.XBottomFragmentTabHost
+            android:id="@+id/xBottom_tabHost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+        </org.fonuhuolian.xbottombar.XBottomFragmentTabHost>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/middleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:minHeight="50dp">
+
+        <ImageView
+            android:id="@+id/xBottom_middle_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6.5dp"
+            android:minHeight="24dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/xBottom_middle_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="3dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="11dp"
+            tools:text="消息" />
+
+    </RelativeLayout>
+
+</FrameLayout>

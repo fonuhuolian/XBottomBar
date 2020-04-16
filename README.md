@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.1.2'
+implementation 'com.github.fonuhuolian:XBottomBar:1.1.4'
 ```
 
 > 混淆
