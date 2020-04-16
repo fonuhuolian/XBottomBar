@@ -63,6 +63,9 @@ public class XBottomBar extends LinearLayout {
         this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.x_bottom_bar, this, true);
         mTabHost = findViewById(R.id.xBottom_tabHost);
+        this.mMiddleIcon = findViewById(R.id.xBottom_middle_icon);
+        this.mMiddleLayout = findViewById(R.id.middleLayout);
+
 
         // 底部导航栏上方的分割线
         mLine = findViewById(R.id.xBottom_line);
