@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.1.6'
+implementation 'com.github.fonuhuolian:XBottomBar:1.1.7'
 ```
 
 > 混淆
@@ -32,10 +32,9 @@ implementation 'com.github.fonuhuolian:XBottomBar:1.1.6'
 
 > xml
 ```
-需要注意的是：当分割线为图片时
+需要注意的是：当分割线为.9图图片时
 app:xBottom_dividerColor="@mipmap/bbbb"
-下面的高度属性会失效，会用图片本身的高度去适应 所以图片请用.9图进行拉伸适配
-app:xBottom_dividerHeight="1px"
+xBottom_dividerHeight属性会失效，会用图片本身的高度，长度去自动拉伸至屏幕宽度
 ```
 
 ```

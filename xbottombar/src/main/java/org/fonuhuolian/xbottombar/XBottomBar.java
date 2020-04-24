@@ -9,13 +9,13 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -92,11 +92,10 @@ public class XBottomBar extends LinearLayout {
         if (lineColor instanceof ColorDrawable) {
             // 高度用用户设置的
         } else if (lineColor instanceof BitmapDrawable) {
-            Log.e("Ddd", "BitmapDrawable" + lineColor.getIntrinsicHeight());
+            // 高度用用户设置的
+        } else if (lineColor instanceof NinePatchDrawable) {
+            // 高度用.9图的高度 宽度自动去拉伸
             addXBottomDividerHeight(lineColor.getIntrinsicHeight());
-        } else {
-            // 用户没设置背景
-            addXBottomDividerHeight(0);
         }
 
         // 导航栏背景色
