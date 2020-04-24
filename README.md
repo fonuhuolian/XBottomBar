@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.1.7'
+implementation 'com.github.fonuhuolian:XBottomBar:1.1.8'
 ```
 
 > 混淆
@@ -46,6 +46,19 @@ xBottom_dividerHeight属性会失效，会用图片本身的高度，长度去�
     app:xBottom_selectedTextColor="@color/colorAccent"
     app:xBottom_unSelectedTextColor="@color/colorPrimaryDark" />
 ```
+```
+app:xBottom_isUseClickAnim="true"  是否使用点击的动画 默认使用
+app:xBottom_background="#fffff"  底部导航栏背景色
+app:XBottom_bar_content_margin="-10dp" 底部导航栏距离内容区域的距离，默认0
+app:xBottom_dividerColor="@color/colorPrimary"  分割线颜色
+app:xBottom_selectedTextColor="@color/colorAccent"  选中文本颜色
+app:xBottom_unSelectedTextColor="@color/colorPrimaryDark"  未选中文本颜色
+app:xBottom_dividerHeight="1dp" 分割线高度
+app:xBottom_icon_margin_top="6dp" 图标距离顶部的高度
+app:xBottom_text_margin_bottom="6dp"  文字与图标之间的距离
+app:xBottom_text_icon_margin="3dp" 文字距离底部的距离
+app:xBottom_middle_icon_margin_text="0dp" 对需要超出底部导航栏的中间的图标 设置文字与图标的距离
+```
 
 > 代码
 
@@ -59,6 +72,9 @@ xBottomBar
     .addXBottomItem(new XBottomItem(R.mipmap.msg_normal, R.mipmap.msg_press, "消息"))
     .addXBottomItem(new XBottomItem(R.mipmap.my_normal, R.mipmap.my_press, "我的").setFragment(MeFragment.class))
     .xBottomInitialise();
+
+// 添加可设置超出底部导航栏的中间图标 addXBottomMiddleItemClipChildren();
+// 注意   addXBottomItem 或  addXBottomMiddleItemClipChildren 添加顺序影响图标的摆放 请按从左到右的顺序进行依次添加
 
 // 设置数字提醒样式 以及 数量
 xBottomBar.getXBottomTabView(0).setCircleSytle(XBottomCircleStyle.WHITESOLID).setNoticeNum(1);
