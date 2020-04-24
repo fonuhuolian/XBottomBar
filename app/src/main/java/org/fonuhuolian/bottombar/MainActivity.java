@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements XBottomBarListene
         // 初始化底部导航栏
         xBottomBar
                 .addXBottomItem(new XBottomItem(R.mipmap.application_normal, R.mipmap.application_press, "主页").setFragment(ApplicationFragment.class))
-                .addXBottomItem(new XBottomItem(R.mipmap.msg_normal, R.mipmap.msg_press, "消息"))
+                .addXBottomItem(new XBottomItem(R.mipmap.msg_normal, R.mipmap.msg_normal, "消息"))
                 .addXBottomItem(new XBottomItem(R.mipmap.my_normal, R.mipmap.my_press, "我的").setFragment(MeFragment.class))
                 .xBottomInitialise();
 

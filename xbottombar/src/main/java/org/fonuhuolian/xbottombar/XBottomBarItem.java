@@ -27,7 +27,7 @@ public class XBottomBarItem extends RelativeLayout {
      * @param imgResSelected   选中状态时的图片
      * @param title            文字描述
      */
-    public XBottomBarItem(Context context, int imgResUnSelected, int imgResSelected, String title) {
+    public XBottomBarItem(Context context, int imgResUnSelected, int imgResSelected, String title, int iconMarginTop, int iconMarginText, int textMarginBottom) {
         super(context);
 
         // 加载布局
@@ -38,6 +38,14 @@ public class XBottomBarItem extends RelativeLayout {
 
         XBottomIcon.setImageDrawable(XBottomUtil.getStateListDrawable(context, imgResUnSelected, imgResSelected));
         XBottomTitle.setText(title);
+
+        RelativeLayout.LayoutParams XBottomIconLayoutParams = (RelativeLayout.LayoutParams) XBottomIcon.getLayoutParams();
+        XBottomIconLayoutParams.topMargin = iconMarginTop;
+        XBottomIcon.setLayoutParams(XBottomIconLayoutParams);
+        RelativeLayout.LayoutParams XBottomTitleLayoutParams = (LayoutParams) XBottomTitle.getLayoutParams();
+        XBottomTitleLayoutParams.topMargin = iconMarginText;
+        XBottomTitleLayoutParams.bottomMargin = textMarginBottom;
+        XBottomTitle.setLayoutParams(XBottomTitleLayoutParams);
 
         // 默认数字提醒,默认文字颜色
         XBottomBadge.setCircleStyle(XBottomCircleStyle.REDSOLID);

@@ -8,6 +8,10 @@
         <attr name="xBottom_isUseClickAnim" format="boolean" />
         <attr name="xBottom_background" format="color|reference" />
         <attr name="xBottom_dividerHeight" format="dimension" />
+        <attr name="xBottom_text_margin_bottom" format="dimension" />
+        <attr name="xBottom_text_icon_margin" format="dimension" />
+        <attr name="xBottom_icon_margin_top" format="dimension" />
+        <attr name="xBottom_middle_icon_margin_text" format="dimension" />
     </declare-styleable>
 
 </resources>

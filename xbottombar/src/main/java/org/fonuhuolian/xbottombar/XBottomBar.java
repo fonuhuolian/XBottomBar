@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -13,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 /**
@@ -37,6 +41,8 @@ public class XBottomBar extends LinearLayout {
     private RelativeLayout mMiddleLayout;
     // 分割线
     private View mLine;
+    // 中间图片
+    private TextView mTempText;
     // 上下文
     private Context mContext;
 
@@ -47,6 +53,10 @@ public class XBottomBar extends LinearLayout {
     private int selectedTextColor = 0xffff0000;// 选中的文字颜色
     private int unSelectedTextColor = 0xffff0000;// 未选中的文字颜色
     private boolean isUseAnim;// 是否使用动画
+    private int iconMarginTop;// 图片距离顶部高度
+    private int iconMarginText;// 图片文字距离
+    private int textMarginBottom;// 文字距离底部高度
+    private int middleIconMarginText;// 中间图片文字距离
 
     // 标识
     private int mark = -1;
@@ -65,7 +75,12 @@ public class XBottomBar extends LinearLayout {
         mTabHost = findViewById(R.id.xBottom_tabHost);
         this.mMiddleIcon = findViewById(R.id.xBottom_middle_icon);
         this.mMiddleLayout = findViewById(R.id.middleLayout);
+        this.mTempText = findViewById(R.id.tempText);
 
+        RelativeLayout.LayoutParams XBottomTitleLayoutParams = (RelativeLayout.LayoutParams) mTempText.getLayoutParams();
+        XBottomTitleLayoutParams.topMargin = middleIconMarginText;
+        XBottomTitleLayoutParams.bottomMargin = textMarginBottom;
+        mTempText.setLayoutParams(XBottomTitleLayoutParams);
 
         // 底部导航栏上方的分割线
         mLine = findViewById(R.id.xBottom_line);
@@ -73,6 +88,16 @@ public class XBottomBar extends LinearLayout {
 
         // 设置分割线高度
         addXBottomDividerHeight(lineHeight);
+
+        if (lineColor instanceof ColorDrawable) {
+            // 高度用用户设置的
+        } else if (lineColor instanceof BitmapDrawable) {
+            Log.e("Ddd", "BitmapDrawable" + lineColor.getIntrinsicHeight());
+            addXBottomDividerHeight(lineColor.getIntrinsicHeight());
+        } else {
+            // 用户没设置背景
+            addXBottomDividerHeight(0);
+        }
 
         // 导航栏背景色
         mTabHost.setBackground(bgDrawable);
@@ -96,14 +121,23 @@ public class XBottomBar extends LinearLayout {
         isUseAnim = ta.getBoolean(R.styleable.XBottomBar_xBottom_isUseClickAnim, true);
         bgDrawable = ta.getDrawable(R.styleable.XBottomBar_xBottom_background);
         lineHeight = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_dividerHeight, 1);
+        iconMarginTop = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_icon_margin_top, dip2px(6.5f));
+        iconMarginText = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_text_icon_margin, dip2px(2));
+        textMarginBottom = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_text_margin_bottom, dip2px(3));
+        middleIconMarginText = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_middle_icon_margin_text, iconMarginText);
         ta.recycle();
+    }
+
+    private int dip2px(float dpValue) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     /****************填充底部导航栏数据*****************************/
     public XBottomBar addXBottomItem(XBottomItem xItem) {
 
         // 组装底部导航栏的item
-        XBottomBarItem item = new XBottomBarItem(mContext, xItem.getImgResUnSelected(), xItem.getImgResSelected(), xItem.getTitle())
+        XBottomBarItem item = new XBottomBarItem(mContext, xItem.getImgResUnSelected(), xItem.getImgResSelected(), xItem.getTitle(), iconMarginTop, iconMarginText, textMarginBottom)
                 .setTextColor(unSelectedTextColor, selectedTextColor);
 
         mTabHost.addTab(mTabHost.newTabSpec(String.valueOf(++mark)).setIndicator(item)
@@ -115,7 +149,7 @@ public class XBottomBar extends LinearLayout {
     public XBottomBar addXBottomMiddleItemClipChildren(XBottomItem xItem) {
 
         // 组装底部导航栏的item
-        XBottomBarItem item = new XBottomBarItem(mContext, android.R.color.transparent, android.R.color.transparent, xItem.getTitle())
+        XBottomBarItem item = new XBottomBarItem(mContext, android.R.color.transparent, android.R.color.transparent, xItem.getTitle(), iconMarginTop, iconMarginText, textMarginBottom)
                 .setTextColor(unSelectedTextColor, selectedTextColor);
 
         mTabHost.addTab(mTabHost.newTabSpec(String.valueOf(++mark)).setIndicator(item)

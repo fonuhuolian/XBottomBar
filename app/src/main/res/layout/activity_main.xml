@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:xBottom_dividerColor="@color/colorPrimary"
+        app:xBottom_icon_margin_top="6dp"
+        app:xBottom_middle_icon_margin_text="0dp"
         app:xBottom_selectedTextColor="@color/colorAccent"
+        app:xBottom_text_margin_bottom="6dp"
         app:xBottom_unSelectedTextColor="@color/colorPrimaryDark" />
 
 </LinearLayout>
