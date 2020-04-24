@@ -34,7 +34,7 @@ implementation 'com.github.fonuhuolian:XBottomBar:1.1.6'
 ```
 需要注意的是：当分割线为图片时
 app:xBottom_dividerColor="@mipmap/bbbb"
-高度属性会失效，会用图片本身的高度去适应 所以图片请用.9图进行拉伸适配
+下面的高度属性会失效，会用图片本身的高度去适应 所以图片请用.9图进行拉伸适配
 app:xBottom_dividerHeight="1px"
 ```
 
