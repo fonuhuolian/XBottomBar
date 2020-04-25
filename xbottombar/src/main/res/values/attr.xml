@@ -12,7 +12,6 @@
         <attr name="xBottom_text_icon_margin" format="dimension" />
         <attr name="xBottom_icon_margin_top" format="dimension" />
         <attr name="xBottom_middle_icon_margin_text" format="dimension" />
-        <attr name="XBottom_bar_content_margin" format="dimension" />
     </declare-styleable>
 
 </resources>

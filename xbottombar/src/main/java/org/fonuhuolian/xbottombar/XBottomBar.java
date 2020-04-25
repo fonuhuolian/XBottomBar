@@ -57,7 +57,6 @@ public class XBottomBar extends LinearLayout {
     private int iconMarginText;// 图片文字距离
     private int textMarginBottom;// 文字距离底部高度
     private int middleIconMarginText;// 中间图片文字距离
-    private int contentMargin;// 底部导航栏与内容之间的间距
 
     // 标识
     private int mark = -1;
@@ -86,9 +85,6 @@ public class XBottomBar extends LinearLayout {
         // 底部导航栏上方的分割线
         mLine = findViewById(R.id.xBottom_line);
         mLine.setBackground(lineColor);
-        LayoutParams layoutParams = (LayoutParams) mLine.getLayoutParams();
-        layoutParams.topMargin = contentMargin;
-        mLine.setLayoutParams(layoutParams);
 
         // 设置分割线高度
         addXBottomDividerHeight(lineHeight);
@@ -128,7 +124,6 @@ public class XBottomBar extends LinearLayout {
         iconMarginText = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_text_icon_margin, dip2px(2));
         textMarginBottom = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_text_margin_bottom, dip2px(3));
         middleIconMarginText = (int) ta.getDimension(R.styleable.XBottomBar_xBottom_middle_icon_margin_text, iconMarginText);
-        contentMargin = (int) ta.getDimension(R.styleable.XBottomBar_XBottom_bar_content_margin, 0);
         ta.recycle();
     }
 

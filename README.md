@@ -16,7 +16,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XBottomBar:1.1.8'
+implementation 'com.github.fonuhuolian:XBottomBar:1.1.9'
 ```
 
 > 混淆
@@ -49,7 +49,6 @@ xBottom_dividerHeight属性会失效，会用图片本身的高度，长度去�
 ```
 app:xBottom_isUseClickAnim="true"  是否使用点击的动画 默认使用
 app:xBottom_background="#fffff"  底部导航栏背景色
-app:XBottom_bar_content_margin="-10dp" 底部导航栏距离内容区域的距离，默认0
 app:xBottom_dividerColor="@color/colorPrimary"  分割线颜色
 app:xBottom_selectedTextColor="@color/colorAccent"  选中文本颜色
 app:xBottom_unSelectedTextColor="@color/colorPrimaryDark"  未选中文本颜色
